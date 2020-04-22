@@ -1,12 +1,14 @@
 package com.centerm.nettydecode.service;
 
 import com.centerm.nettydecode.pojo.User;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Sheva
  * @date 2020/4/21 14:57
  * @description
  */
+
 public interface UserService {
 
     /**

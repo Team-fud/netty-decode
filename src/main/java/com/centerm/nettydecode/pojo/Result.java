@@ -1,5 +1,6 @@
 package com.centerm.nettydecode.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -8,12 +9,10 @@ import lombok.Data;
  * @description
  */
 @Data
+@AllArgsConstructor
 public class Result {
+    private String status;
+    private String msg;
 
-    private int code;
-
-    public Result(int code){
-        this.code = code;
-    }
 
 }

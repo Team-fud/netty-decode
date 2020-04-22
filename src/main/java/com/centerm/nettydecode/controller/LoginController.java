@@ -7,10 +7,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.Objects;
@@ -21,7 +18,7 @@ import java.util.Objects;
  * @description
  */
 
-@Controller
+@RestController
 @Api(value = "api", tags = {"登录测试"})
 @Slf4j
 public class LoginController {
@@ -30,10 +27,8 @@ public class LoginController {
     private UserService userService;
 
     @CrossOrigin
-    @PostMapping("api/login")
-    @ResponseBody
-
-    public Result login(@RequestBody User reqUser){
+    @PostMapping("/login")
+    public Result login(User reqUser){
         String username = reqUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
         User user = userService.findByUsername(username);
@@ -41,11 +36,10 @@ public class LoginController {
         log.info(user.getPassword());
         if (!Objects.equals(user.getUsername(), username) || !Objects.equals(user.getPassword(), reqUser.getPassword())){
             log.info("账号密码错误...");
-            return new Result(400);
+            return new Result("error","登录失败，账号密码错误");
         }
         log.info("登录成功...");
-        return new Result(200);
+        return new Result("success","登录成功");
     }
-
 
 }

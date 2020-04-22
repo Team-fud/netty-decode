@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.nettydecode.dao.TerminalDao">
+    <select id="getAllTerminals" resultType="com.centerm.nettydecode.pojo.Terminal">
+            SELECT *  FROM terminal
+    </select>
+    <select id="search" resultType="com.centerm.nettydecode.pojo.Terminal">
+        SELECT *
+        FROM terminal
+        WHERE cateName LIKE concat('%',#{keywords},'%')
+    </select>
+    <delete id="deleteTerminals" >
+        DELETE FROM  terminal WHERE id IN
+        <foreach collection="ids" separator="," open="(" close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="updateTerminal" parameterType="com.centerm.nettydecode.pojo.Terminal">
+        UPDATE terminal SET cateName=#{cateName} WHERE id =#{id}
+    </update>
+    <insert id="addNewTerminal" parameterType="com.centerm.nettydecode.pojo.Terminal">
+        INSERT INTO terminal
+        SET date = now(), cateName = #{cateName}
+    </insert>
+</mapper>
