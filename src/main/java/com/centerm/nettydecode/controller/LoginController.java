@@ -29,6 +29,7 @@ public class LoginController {
     @CrossOrigin
     @PostMapping("/login")
     public Result login(User reqUser){
+        log.info("执行登录操作");
         String username = reqUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
         User user = userService.findByUsername(username);
