@@ -23,4 +23,9 @@
         INSERT INTO terminal
         SET date = now(), cateName = #{cateName}
     </insert>
+    <select id="selectByPrimaryKey" parameterType="int" resultType="com.centerm.nettydecode.pojo.Terminal">
+        SELECT *
+        FROM terminal
+        WHERE id = #{id}
+    </select>
 </mapper>

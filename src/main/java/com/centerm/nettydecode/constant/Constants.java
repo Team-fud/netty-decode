@@ -6,6 +6,8 @@ package com.centerm.nettydecode.constant;
  * @date 2020/3/3 下午7:54
  */
 public class Constants {
+
+    private Constants(){}
     /**
      * 解码请求
      */

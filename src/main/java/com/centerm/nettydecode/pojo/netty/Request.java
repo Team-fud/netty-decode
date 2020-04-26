@@ -1,4 +1,4 @@
-package com.centerm.nettydecode.pojo;
+package com.centerm.nettydecode.pojo.netty;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,8 +1,7 @@
 package com.centerm.nettydecode.dao;
 
-import com.centerm.nettydecode.pojo.User;
+import com.centerm.nettydecode.pojo.user.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 /**
  * @author Sheva

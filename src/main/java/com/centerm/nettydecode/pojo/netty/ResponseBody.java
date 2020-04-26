@@ -1,4 +1,4 @@
-package com.centerm.nettydecode.pojo;
+package com.centerm.nettydecode.pojo.netty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,17 +6,17 @@ import lombok.Setter;
 /**
  * @ProjectName: jnatest
  * @Package: cn.callback.com.centerm.decode.pojo
- * @ClassName: RequestBody
+ * @ClassName: ResponseBody
  * @Author: jerry
  * @Description: ${description}
- * @Date: 20-3-4 上午10:17
+ * @Date: 20-3-4 上午10:18
  * @Version: 1.0
  */
-@Setter
 @Getter
-public class RequestBody {
+@Setter
+public class ResponseBody {
     /**
-     * 业务员类型
+     * 业务类型
      * 00 解码初始请求平台
      * 01 平台到终端请求
      * 02 终端到平台请求
@@ -24,11 +24,16 @@ public class RequestBody {
      */
     private String trans_code;
     /**
-     * 传输的内容数据
+     * 传输的文件内容（调用so库的响应信息）
      */
-    private String req_data;
+    private String rsp_data;
+
     /**
-     * 请求包含的签名，测试暂时不用写
+     * 身份证图片信息
+     */
+    private String picture;
+    /**
+     * 指令序列，初始值为1， 每次请求提交到平台值加1
      */
     private Integer seq;
 

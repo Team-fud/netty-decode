@@ -12,4 +12,5 @@ public interface TerminalService {
     Boolean deleteTerminal(String ids);
     int updateTerminal(Terminal terminal);
     int addNewTerminal(Terminal terminal);
+    Terminal selectByPrimaryKey(int id);
 }

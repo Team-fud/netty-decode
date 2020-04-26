@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class TerminalServiceImpl implements TerminalService {
     @Autowired
@@ -36,5 +37,10 @@ public class TerminalServiceImpl implements TerminalService {
     @Override
     public int addNewTerminal(Terminal terminal) {
         return terminalDao.addNewTerminal(terminal);
+    }
+
+    @Override
+    public Terminal selectByPrimaryKey(int id) {
+        return terminalDao.selectByPrimaryKey(id);
     }
 }

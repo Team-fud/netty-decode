@@ -1,14 +1,13 @@
-package com.centerm.nettydecode.shiro;
+package com.centerm.nettydecode.jwt;
 
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authc.AuthenticationToken;
 
-/**
- * @author ouyangyi
- */
 @AllArgsConstructor
 public class JwtToken implements AuthenticationToken {
-
+    /**
+     * TOKEN
+     */
     private String token;
 
     @Override
@@ -18,6 +17,6 @@ public class JwtToken implements AuthenticationToken {
 
     @Override
     public Object getCredentials() {
-        return token;
+       return token;
     }
 }

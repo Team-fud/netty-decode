@@ -2,8 +2,8 @@ package com.centerm.nettydecode.server;
 
 import com.alibaba.fastjson.JSONObject;
 import com.centerm.nettydecode.constant.Constants;
-import com.centerm.nettydecode.pojo.Response;
-import com.centerm.nettydecode.pojo.ResponseBody;
+import com.centerm.nettydecode.pojo.netty.Response;
+import com.centerm.nettydecode.pojo.netty.ResponseBody;
 import com.eidlink.idocr.sdk.constants.PublicParam;
 import com.eidlink.idocr.sdk.pojo.request.IdCardCheckParam;
 import com.eidlink.idocr.sdk.pojo.result.CommonResult;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.nettydecode.dao.PermissionDao">
+    <select id="findPermissionByRole" parameterType="string"
+            resultType="com.centerm.nettydecode.pojo.user.Permission">
+        SELECT
+        p.id as id,
+        p.name as name
+        FROM
+        role r
+        LEFT JOIN role_permission rp ON r.id = rp.role_id
+        LEFT JOIN permission p ON p.id = rp.permission_id
+        WHERE  r.name = #{name}
+    </select>
+</mapper>

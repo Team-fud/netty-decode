@@ -1,8 +1,8 @@
 package com.centerm.nettydecode.client;
 
 import com.alibaba.fastjson.JSON;
-import com.centerm.nettydecode.pojo.Request;
-import com.centerm.nettydecode.pojo.RequestBody;
+import com.centerm.nettydecode.pojo.netty.Request;
+import com.centerm.nettydecode.pojo.netty.RequestBody;
 import com.centerm.nettydecode.server.HttpServer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;

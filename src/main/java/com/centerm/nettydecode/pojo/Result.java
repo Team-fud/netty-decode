@@ -11,8 +11,17 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Result {
+    /**
+     * 请求成功还是失败 成功 success 失败 error
+     */
     private String status;
+    /**
+     *  返回具体信息
+     */
     private String msg;
-
+    /**
+     * 返回的数据
+     */
+    private Object data;
 
 }

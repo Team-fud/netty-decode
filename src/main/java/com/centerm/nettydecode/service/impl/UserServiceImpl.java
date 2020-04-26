@@ -1,7 +1,7 @@
 package com.centerm.nettydecode.service.impl;
 
 import com.centerm.nettydecode.dao.UserDao;
-import com.centerm.nettydecode.pojo.User;
+import com.centerm.nettydecode.pojo.user.User;
 import com.centerm.nettydecode.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

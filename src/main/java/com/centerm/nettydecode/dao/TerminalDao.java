@@ -13,4 +13,5 @@ public interface TerminalDao {
     int deleteTerminals(@Param("ids") String[] ids);
     int updateTerminal(Terminal terminal);
     int addNewTerminal(Terminal terminal);
+    Terminal selectByPrimaryKey(int id);
 }

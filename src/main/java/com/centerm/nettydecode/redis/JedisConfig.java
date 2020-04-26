@@ -1,5 +1,8 @@
 package com.centerm.nettydecode.redis;
 
+import com.centerm.nettydecode.util.common.StringUtil;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,6 +18,8 @@ import redis.clients.jedis.JedisPoolConfig;
 @PropertySource("classpath:config.properties")
 @ConfigurationProperties(prefix = "redis")
 @Slf4j
+@Setter
+@Getter
 public class JedisConfig {
 
     private String host;
@@ -46,9 +51,17 @@ public class JedisConfig {
             jedisPoolConfig.setMaxTotal(maxActive);
             jedisPoolConfig.setMinIdle(minIdle);
 
+            if (StringUtil.isBlank(password)){
+                password = null;
+            }
+            JedisPool jedisPool = new JedisPool(jedisPoolConfig,host,port,timeout,password);
+
+            log.info("初始化Redis连接池JedisPool成功!地址: {}:{}", host, port);
+            return jedisPool;
 
         }catch (Exception e){
-
+            log.error("初始化Redis连接池JedisPool异常:{}", e.getMessage());
         }
+        return null;
     }
 }
