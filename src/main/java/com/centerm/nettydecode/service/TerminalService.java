@@ -9,7 +9,7 @@ import java.util.List;
 public interface TerminalService {
     List<Terminal> getAllTerminals();
     List<Terminal> search(String keywords);
-    Boolean deleteTerminal(String ids);
+    Boolean deleteTerminal(int ids);
     int updateTerminal(Terminal terminal);
     int addNewTerminal(Terminal terminal);
     Terminal selectByPrimaryKey(int id);

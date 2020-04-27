@@ -23,10 +23,9 @@ public class TerminalServiceImpl implements TerminalService {
     }
 
     @Override
-    public Boolean deleteTerminal(String ids) {
-        String[] spilt = ids.split(",");
-        int result = terminalDao.deleteTerminals(spilt);
-        return result == spilt.length;
+    public Boolean deleteTerminal(int ids) {
+        boolean result = terminalDao.deleteTerminals(ids);
+        return result;
     }
 
     @Override

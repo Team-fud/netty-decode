@@ -29,7 +29,7 @@ public class Exceptionadvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(ShiroException.class)
     public Result handle401(ShiroException e) {
-        return new Result("error", "无权访问(Unauthorized):" + e.getMessage(), null);
+        return new Result("error", "无权访问(Unauthorized)", null);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Exceptionadvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException.class)
     public Result handle401(UnauthorizedException e) {
-        return new Result("error", "无权访问(Unauthorized):当前Subject没有此请求所需权限(" + e.getMessage() + ")", null);
+        return new Result("error", "无权访问(Unauthorized):当前Subject没有此请求所需权限", null);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Exceptionadvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthenticatedException.class)
     public Result handle401(UnauthenticatedException e) {
-        return new Result("error", "无权访问(Unauthorized):当前Subject是匿名Subject，请先登录(This subject is anonymous.)", null);
+        return new Result("error", "无权访问(Unauthorized):请先登录", null);
     }
 
 

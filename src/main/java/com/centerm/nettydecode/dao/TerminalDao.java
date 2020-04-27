@@ -10,7 +10,7 @@ import java.util.List;
 public interface TerminalDao {
     List<Terminal> getAllTerminals();
     List<Terminal> search(String keywords);
-    int deleteTerminals(@Param("ids") String[] ids);
+    boolean deleteTerminals(int ids);
     int updateTerminal(Terminal terminal);
     int addNewTerminal(Terminal terminal);
     Terminal selectByPrimaryKey(int id);

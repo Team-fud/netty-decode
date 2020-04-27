@@ -10,11 +10,8 @@
         FROM terminal
         WHERE cateName LIKE concat('%',#{keywords},'%')
     </select>
-    <delete id="deleteTerminals" >
-        DELETE FROM  terminal WHERE id IN
-        <foreach collection="ids" separator="," open="(" close=")" item="id">
-            #{id}
-        </foreach>
+    <delete id="deleteTerminals" parameterType="int">
+        DELETE FROM  terminal WHERE id = #{ids}
     </delete>
     <update id="updateTerminal" parameterType="com.centerm.nettydecode.pojo.Terminal">
         UPDATE terminal SET cateName=#{cateName} WHERE id =#{id}

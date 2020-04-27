@@ -66,13 +66,12 @@ public class MyRealm extends AuthorizingRealm {
                 simpleAuthorizationInfo.addRole(role.getName());
                 System.out.println("目前的角色为："+role.getName());
                 // 根据用户角色查询权限
+                System.out.println("开始查询权限");
                 List<Permission> permissionList = permissionDao.findPermissionByRole(role.getName());
                 for (Permission permission : permissionList) {
-                        if (permission != null || permission.getName() != "") {
                         // 添加权限
                             System.out.println("目前的权限为："+permission.getName());
                             simpleAuthorizationInfo.addStringPermission(permission.getPerCode());
-                    }
                 }
             }
         }
@@ -89,7 +88,7 @@ public class MyRealm extends AuthorizingRealm {
         String username = JwtUtil.getClaim(token, RedisConstants.ACCOUNT);
         // 帐号为空
         if (StringUtil.isBlank(username)) {
-            throw new AuthenticationException("Token中帐号为空(The username in Token is empty.)");
+            throw new AuthenticationException("Token中帐号为空");
         }
 
         // 查询用户是否存在
@@ -97,7 +96,7 @@ public class MyRealm extends AuthorizingRealm {
         user.setUsername(username);
         user = userDao.findByUsername(username);
         if (user == null) {
-            throw new AuthenticationException("该帐号不存在(The username does not exist.)");
+            throw new AuthenticationException("该帐号不存在");
         }
 
         // 开始认证，要AccessToken认证通过，且Redis中存在RefreshToken，且两个Token时间戳一致
@@ -111,7 +110,7 @@ public class MyRealm extends AuthorizingRealm {
                 }
             }
         }catch (Exception e) {
-            throw new AuthenticationException("Token已过期(Token expired or incorrect.)");
+            throw new AuthenticationException("Token已过期");
         }
         return null;
     }
