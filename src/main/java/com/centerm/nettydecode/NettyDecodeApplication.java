@@ -9,14 +9,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Sheva
  */
 @SpringBootApplication
-public class NettyDecodeApplication implements CommandLineRunner {
+public class NettyDecodeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NettyDecodeApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        new HttpServer().start();
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//        new HttpServer().start();
+//    }
 }

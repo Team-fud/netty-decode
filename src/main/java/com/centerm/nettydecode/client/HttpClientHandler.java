@@ -20,14 +20,14 @@ import org.slf4j.LoggerFactory;
 public class HttpClientHandler extends ChannelInboundHandlerAdapter {
 
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        FullHttpResponse httpResponse = (FullHttpResponse)msg;
-
-        ByteBuf content = httpResponse.content();
-        String resp = content.toString(CharsetUtil.UTF_8);
-        JSONObject object = JSONObject.parseObject(resp);
-        log.info("客户端接收到服务端返回的数据: " + object.toJSONString());
-        content.release();
-    }
+//    @Override
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//        FullHttpResponse httpResponse = (FullHttpResponse)msg;
+//
+//        ByteBuf content = httpResponse.content();
+//        String resp = content.toString(CharsetUtil.UTF_8);
+//        JSONObject object = JSONObject.parseObject(resp);
+//        log.info("客户端接收到服务端返回的数据: " + object.toJSONString());
+//        content.release();
+//    }
 }

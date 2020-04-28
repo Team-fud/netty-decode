@@ -18,7 +18,7 @@
     </update>
     <insert id="addNewTerminal" parameterType="com.centerm.nettydecode.pojo.Terminal">
         INSERT INTO terminal
-        SET date = now(), cateName = #{cateName}
+        SET date = NOW(), cateName = #{cateName}
     </insert>
     <select id="selectByPrimaryKey" parameterType="int" resultType="com.centerm.nettydecode.pojo.Terminal">
         SELECT *

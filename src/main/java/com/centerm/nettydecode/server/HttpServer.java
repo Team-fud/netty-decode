@@ -15,23 +15,23 @@ import org.slf4j.LoggerFactory;
  */
 public class HttpServer {
 
-    public static final int PORT = 8888;
-
-    public static EventLoopGroup group = new NioEventLoopGroup();
-    public static ServerBootstrap serverBootstrap = new ServerBootstrap();
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    public void start() throws Exception {
-        logger.info("服务启动...");
-        try{
-            serverBootstrap.group(group)
-                    .channel(NioServerSocketChannel.class)
-                    .childHandler(new ServerHandlerInit());
-
-            ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
-            channelFuture.channel().closeFuture().sync();
-        }finally {
-            group.shutdownGracefully().sync();
-        }
-    }
+//    public static final int PORT = 8888;
+//
+//    public static EventLoopGroup group = new NioEventLoopGroup();
+//    public static ServerBootstrap serverBootstrap = new ServerBootstrap();
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//
+//    public void start() throws Exception {
+//        logger.info("服务启动...");
+//        try{
+//            serverBootstrap.group(group)
+//                    .channel(NioServerSocketChannel.class)
+//                    .childHandler(new ServerHandlerInit());
+//
+//            ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
+//            channelFuture.channel().closeFuture().sync();
+//        }finally {
+//            group.shutdownGracefully().sync();
+//        }
+//    }
 }

@@ -19,7 +19,7 @@ import java.util.Map;
  * @author ouyangyi
  */
 @RestController
-@RequestMapping("/terminal")
+@RequestMapping("/vue/terminal")
 public class TerminalController {
 
     @Autowired

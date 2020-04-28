@@ -45,27 +45,36 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
                 this.executeLogin(request, response);
                 System.out.println("token 认证成功");
             } catch (Exception e) {
+                System.out.println("认证出现异常");
                 // 认证出现异常，传递错误信息msg
                 String msg = e.getMessage();
-                // 获取应用异常(该Cause是导致抛出此throwable(异常)的throwable(异常))
-                Throwable throwable = e.getCause();
-                if (throwable instanceof SignatureVerificationException) {
-                    // 该异常为JWT的AccessToken认证失败(Token或者密钥不正确)
-                    msg = "Token或者密钥不正确";
-                } else if (throwable instanceof TokenExpiredException) {
-                    // 该异常为JWT的AccessToken已过期，判断RefreshToken未过期就进行AccessToken刷新
-                    if (this.refreshToken(request, response)) {
-                        return true;
-                    } else {
-                        msg = "Token已过期";
-                    }
+                if (this.refreshToken(request, response)) {
+                    return true;
                 } else {
-                    // 应用异常不为空
-                    if (throwable != null) {
-                        // 获取应用异常msg
-                        msg = throwable.getMessage();
-                    }
+                    msg = "Token已过期";
                 }
+//                // 获取应用异常(该Cause是导致抛出此throwable(异常)的throwable(异常))
+//                Throwable throwable = e.getCause();
+//                if (e instanceof SignatureVerificationException) {
+//                    // 该异常为JWT的AccessToken认证失败(Token或者密钥不正确)
+//                    msg = "Token或者密钥不正确";
+//                    System.out.println("Token或者密钥不正确");
+//                } else if (e instanceof TokenExpiredException) {
+//                    // 该异常为JWT的AccessToken已过期，判断RefreshToken未过期就进行AccessToken刷新
+//                    System.out.println("jwt token的accessToken已经过期，判断refreshToken未过期就进行刷新");
+//                    if (this.refreshToken(request, response)) {
+//                        return true;
+//                    } else {
+//                        msg = "Token已过期";
+//                    }
+//                } else {
+//                    System.out.println("异常");
+//                    // 应用异常不为空
+//                    if (throwable != null) {
+//                        // 获取应用异常msg
+//                        msg = "应用异常";
+//                    }
+//                }
                 // Token认证失败直接返回Response信息
                 this.response401(response, msg);
                 return false;
@@ -150,12 +159,16 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         String token = this.getAuthzHeader(request);
         // 获取当前Token的帐号信息
         String username = JwtUtil.getClaim(token, RedisConstants.ACCOUNT);
+        System.out.println("当前token的账号信息");
         // 判断Redis中RefreshToken是否存在
         if (JedisUtil.exists(RedisConstants.PREFIX_SHIRO_REFRESH_TOKEN + username)) {
+            System.out.println("refresh token还存在");
             // Redis中RefreshToken还存在，获取RefreshToken的时间戳
             String currentTimeMillisRedis = JedisUtil.getObject(RedisConstants.PREFIX_SHIRO_REFRESH_TOKEN + username).toString();
+            System.out.println("开始时间戳比对");
             // 获取当前AccessToken中的时间戳，与RefreshToken的时间戳对比，如果当前时间戳一致，进行AccessToken刷新
             if (JwtUtil.getClaim(token, RedisConstants.CURRENT_TIME_MILLIS).equals(currentTimeMillisRedis)) {
+                System.out.println("时间戳对比一致");
                 // 获取当前最新时间戳
                 String currentTimeMillis = String.valueOf(System.currentTimeMillis());
                 // 读取配置文件，获取refreshTokenExpireTime属性
@@ -164,6 +177,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
                 // 设置RefreshToken中的时间戳为当前最新时间戳，且刷新过期时间重新为30分钟过期(配置文件可配置refreshTokenExpireTime属性)
                 JedisUtil.setObject(RedisConstants.PREFIX_SHIRO_REFRESH_TOKEN + username, currentTimeMillis, Integer.parseInt(refreshTokenExpireTime));
                 // 刷新AccessToken，设置时间戳为当前最新时间戳
+                System.out.println("刷新accessToken时间戳");
                 token = JwtUtil.sign(username, currentTimeMillis);
                 // 将新刷新的AccessToken再次进行Shiro的登录
                 JwtToken jwtToken = new JwtToken(token);
@@ -192,7 +206,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             out.append(data);
         } catch (IOException e) {
             log.error("直接返回Response信息出现IOException异常:{}", e.getMessage());
-            throw new CustomException("直接返回Response信息出现IOException异常:" + e.getMessage());
+            throw new CustomException("直接返回Response信息出现IOException异常");
         }
     }
 }

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @Api(value = "api", tags = {"登录测试"})
 @Slf4j
-@RequestMapping("/user")
+@RequestMapping("/vue/user")
 public class LoginController {
 
     /**
