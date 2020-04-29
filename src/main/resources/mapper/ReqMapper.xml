@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.nettydecode.dao.ReqDao">
+    <select id="getAllReq" resultType="com.centerm.nettydecode.pojo.ReqRecord">
+        SELECT id,sn,ip
+        FROM admin.req_record
+    </select>
+    <delete id="deleteReq" parameterType="int">
+        DELETE FROM admin.req_record
+        WHERE id = #{id}
+    </delete>
+    <select id="findById" parameterType="int" resultType="com.centerm.nettydecode.pojo.ReqRecord">
+        SELECT id,sn,ip,req_data AS reqData,rsp_data AS rspData,execute_time AS executeTime
+        FROM admin.req_record
+        WHERE id = #{id}
+    </select>
+    <select id="search" resultType="com.centerm.nettydecode.pojo.ReqRecord">
+        SELECT id,sn,ip
+        FROM admin.req_record
+        WHERE sn LIKE concat('%',#{content},'%')
+    </select>
+</mapper>

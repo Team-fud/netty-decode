@@ -1,6 +1,7 @@
 package com.centerm.nettydecode.controller;
 
 import com.centerm.nettydecode.pojo.Result;
+import com.centerm.nettydecode.pojo.SysLog;
 import com.centerm.nettydecode.pojo.Terminal;
 import com.centerm.nettydecode.service.TerminalService;
 import com.github.pagehelper.PageInfo;
@@ -111,5 +112,8 @@ public class TerminalController {
         }
         return new Result("success", "查询成功(Query was successful)", terminal);
     }
+
+
+
 
 }

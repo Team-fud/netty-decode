@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.centerm.nettydecode.dao.SysDao">
+    <select id="getAllLog" resultType="com.centerm.nettydecode.pojo.SysLog">
+        SELECT id,create_time AS createTime,
+            description,username,params,
+            request_ip AS reqIp,log_type AS logType,
+            exception_detail AS exceptionDetail,
+            method,execute_time AS executeTime
+        FROM admin.log
+    </select>
+    <delete id="deleteLog" parameterType="int">
+        DELETE FROM admin.log
+        WHERE id = #{id}
+    </delete>
+    <select id="search" resultType="com.centerm.nettydecode.pojo.SysLog">
+        SELECT id,create_time AS createTime,
+            description,username,params,
+            request_ip AS reqIp,log_type AS logType,
+            exception_detail AS exceptionDetail,
+            method,execute_time AS executeTime
+        FROM admin.log
+        WHERE username LIKE concat('%',#{content},'%')
+    </select>
+    <select id="findById" parameterType="int" resultType="com.centerm.nettydecode.pojo.SysLog">
+        SELECT id,create_time AS createTime,
+            description,username,params,
+            request_ip AS reqIp,log_type AS logType,
+            exception_detail AS exceptionDetail,
+            method,execute_time AS executeTime
+        FROM admin.log
+        WHERE id = #{id}
+    </select>
+    <update id="updateLog" parameterType="com.centerm.nettydecode.pojo.SysLog">
+        UPDATE admin.log
+        SET
+        <if test="username != null and username != '' ">
+            username = #{username},
+        </if>
+        <if test="reqIp != null and reqIp != '' ">
+            request_ip = #{reqIp},
+        </if>
+        <if test="params != null and params != '' ">
+            params = #{params},
+        </if>
+        <if test="logType != null and logType != '' ">
+            log_type = #{logType},
+        </if>
+        <if test="method != null and method != '' ">
+            method = #{method},
+        </if>
+        <if test="exceptionDetail != null and exceptionDetail != '' ">
+            exception_detail = #{exceptionDetail}
+        </if>
+        WHERE id =#{id}
+    </update>
+</mapper>
